@@ -1,45 +1,30 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="30dp"
-        android:height="30dp"
+        android:width="50dp"
+        android:height="50dp"
         android:viewportWidth="312.11572"
         android:viewportHeight="291.9611">
-    <path
-        android:fillColor="#ff000000"
-        android:pathData="M274.76,246A45.96,126.27 90,1 1,22.22 246A45.96,126.27 90,1 1,274.76 246z"
-        android:strokeLineCap="round"
-        android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:strokeWidth="3"
-        android:strokeLineJoin="round"
-        android:strokeAlpha="1"/>
-    <path
+
+    <path android:name="dessous sous-tasse"
         android:fillColor="#ffa0a0a0"
         android:pathData="M274.76,246A45.96,126.27 90,1 1,22.22 246A45.96,126.27 90,1 1,274.76 246z"
         android:strokeLineCap="round"
         android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:strokeWidth="3"
+        android:strokeColor="#828282"
+        android:strokeWidth="2"
         android:strokeLineJoin="round"
         android:strokeAlpha="1"/>
-    <path
-        android:pathData="M296.98,238A148.49,45.96 0,1 1,-0 238A148.49,45.96 0,1 1,296.98 238z"
-        android:strokeLineCap="round"
-        android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:fillColor="#f2f2f2"
-        android:strokeWidth="3"
-        android:strokeLineJoin="round"
-        android:strokeAlpha="1"/>
-    <path
+
+    <path android:name="dessus sous-tasse"
         android:fillColor="#FFffffff"
         android:pathData="M296.98,236A148.49,45.96 0,1 1,-0 236A148.49,45.96 0,1 1,296.98 236z"
         android:strokeLineCap="round"
         android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:strokeWidth="3"
+        android:strokeColor="#828282"
+        android:strokeWidth="2"
         android:strokeLineJoin="round"
         android:strokeAlpha="1"/>
-    <path
+
+    <path android:name="interieur sous-tasse"
         android:pathData="M217.03,236A21.21,68.53 90,1 1,79.96 236A21.21,68.53 90,1 1,217.03 236z"
         android:strokeLineCap="round"
         android:fillAlpha="1"
@@ -48,25 +33,29 @@
         android:strokeWidth="5.41666746"
         android:strokeLineJoin="round"
         android:strokeAlpha="1"/>
-    <path
+
+    <path android:name="bord tasse dessus"
+        android:pathData="M31.14,78.08C31.14,78.08 31.14,101.21 146.77,101.21C262.4,101.21 262.4,78.08 262.4,78.08C262.4,78.08 262.4,54.95 146.77,54.95C31.14,54.95 31.97,78.9 31.14,78.08z"
+        android:strokeLineCap="butt"
+        android:fillAlpha="1"
+        android:strokeColor="#828282"
+        android:fillColor="#e6e6e6"
+        android:strokeWidth="2"
+        android:strokeLineJoin="miter"
+        android:strokeAlpha="1"/>
+
+    <path android:name="tasse"
         android:fillColor="#FFffffff"
         android:pathData="M31.14,78.08C31.14,78.08 31.14,251.52 146.77,251.52C262.4,251.52 262.4,78.08 262.4,78.08C262.4,78.08 262.4,101.21 146.77,101.21C31.14,101.21 32.79,78.08 31.14,78.08z"
         android:strokeLineCap="butt"
         android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:strokeWidth="1"
+        android:strokeColor="#828282"
+        android:strokeWidth="2"
         android:strokeLineJoin="miter"
         android:strokeAlpha="1"/>
-    <path
-        android:pathData="M31.14,78.08C31.14,78.08 31.14,101.21 146.77,101.21C262.4,101.21 262.4,78.08 262.4,78.08C262.4,78.08 262.4,54.95 146.77,54.95C31.14,54.95 31.97,78.9 31.14,78.08z"
-        android:strokeLineCap="butt"
-        android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:fillColor="#e6e6e6"
-        android:strokeWidth="1"
-        android:strokeLineJoin="miter"
-        android:strokeAlpha="1"/>
-    <path
+
+
+    <path android:name="interieur tasse"
         android:fillColor="#FFa0a0a0"
         android:pathData="M38.57,78.08C38.57,78.08 38.57,99.72 146.77,99.72C254.97,99.72 254.97,78.08 254.97,78.08C254.97,78.08 254.97,56.44 146.77,56.44C38.57,56.44 39.35,78.85 38.57,78.08z"
         android:strokeLineCap="butt"
@@ -75,21 +64,24 @@
         android:strokeWidth="1"
         android:strokeLineJoin="miter"
         android:strokeAlpha="1"/>
-    <path
-        android:fillColor="#FF000000"
+
+    <path android:name="cafe"
+        android:fillColor="#554000"
         android:pathData="M146.77,73.87C103,73.87 65.2,79.17 47.55,86.84C59.16,92.84 85.78,99.7 146.77,99.7C207.77,99.7 234.39,92.84 246,86.84C228.35,79.17 190.54,73.87 146.77,73.87z"
         android:fillAlpha="1"
         android:strokeColor="#00000000"/>
-    <path
+
+    <path android:name="anse"
         android:fillColor="#FFffffff"
         android:pathData="M275.52,100.53C270.64,100.66 265.67,101.65 260.81,103.21C260.28,108.26 259.55,113.86 258.61,119.9C272.17,106.05 297.69,114.14 300.45,127.27C306.98,158.24 253.07,182.91 238.08,189.14C233.99,197.5 229.21,205.51 223.63,212.88C234.21,206.88 283.79,176.49 283.79,176.49C283.79,176.49 323.26,148.58 309.02,121.6C301,106.42 289.44,100.72 277.22,100.53C276.65,100.52 276.09,100.52 275.52,100.53z"
         android:strokeLineCap="butt"
         android:fillAlpha="1"
-        android:strokeColor="#00000000"
-        android:strokeWidth="0.22844239"
+        android:strokeColor="#828282"
+        android:strokeWidth="2"
         android:strokeLineJoin="miter"
         android:strokeAlpha="1"/>
-    <path
+
+    <path android:name="reflet tasse"
         android:fillColor="#FFf0f0f0"
         android:pathData="M98.15,217.56C69.33,184.28 68.53,118.75 70.96,100.81C64.63,99.71 59.34,98.49 54.91,97.22C51.38,131.39 59.09,191.25 98.15,217.56z"
         android:strokeLineCap="butt"
@@ -98,19 +90,5 @@
         android:strokeWidth="1"
         android:strokeLineJoin="miter"
         android:strokeAlpha="1"/>
-    <path
-        android:pathData="M209.1,76.34A24.94,62.55 90,1 1,84.01 76.34A24.94,62.55 90,1 1,209.1 76.34z"
-        android:fillAlpha="0.48684208"
-        android:strokeColor="#00000000"
-        android:fillColor="#ffffff"
-        android:strokeAlpha="1"/>
-    <path
-        android:pathData="M166.77,-0C166.77,-0 152.34,3.2 142.41,6.63C132.23,10.16 124.68,19.01 137.93,35.58C151.3,52.28 148.77,62.8 141.58,81.51C141.58,81.51 169.13,66.02 156.91,44.1C145.09,22.89 144.55,14.67 166.77,-0z"
-        android:strokeLineCap="butt"
-        android:fillAlpha="0.39738016"
-        android:strokeColor="#00000000"
-        android:fillColor="#623d0d"
-        android:strokeWidth="0.705015"
-        android:strokeLineJoin="miter"
-        android:strokeAlpha="1"/>
+
 </vector>
