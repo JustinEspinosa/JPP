@@ -6,7 +6,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -16,9 +18,8 @@ import ch.neymar.jean.jpp.text.JppText;
 import ch.neymar.jean.jpp.utils.ViewRemover;
 
 /**
- *
  * Represents an item to be jpp-ized
- *
+ * <p>
  * Created by justi on 18.08.2017.
  */
 
@@ -31,7 +32,7 @@ public class JppItem {
      * @param drawable : the image of the item
      * @param activity : the main activity
      */
-    public JppItem(Drawable drawable, MainActivity activity){
+    public JppItem(Drawable drawable, MainActivity activity) {
         this.drawable = drawable;
         this.activity = activity;
     }
@@ -41,63 +42,64 @@ public class JppItem {
      *
      * @return the imageview component
      */
-    public ImageView getImageView(){
-        if(imageView == null){
+    public ImageView getImageView() {
+        if (imageView == null) {
             imageView = createImageView();
         }
         return imageView;
     }
 
-    private ViewGroup getParent(){
-        return (ViewGroup)imageView.getParent();
+    private ViewGroup getParent() {
+        return (ViewGroup) imageView.getParent();
     }
 
-    private int getBestAnimation(){
-        int x = getX();
-        int y = getY();
-        int w = getParent().getWidth();
-        int h = getParent().getHeight();
 
-        if(y > h / 2){
-            if(x > w / 2) {
-                return R.anim.fly_up_left;
-            }else{
-                return R.anim.fly_up_right;
-            }
-        }else{
-            if(x > w / 2) {
-                return R.anim.fly_down_left;
-            }else{
-                return R.anim.fly_down_right;
-            }
-        }
-    }
-
-    public int getX(){
+    public int getX() {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
         return params.leftMargin;
     }
 
-    public int getY(){
+    public int getY() {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
         return params.topMargin;
     }
 
-    protected void animate(){
+    protected void animate(float xDelta, float yDelta) {
         getParent().bringChildToFront(imageView);
-        Animation jpp = AnimationUtils.loadAnimation(activity.getApplicationContext(), getBestAnimation());
-        jpp.setAnimationListener(new ViewRemover(activity,imageView));
+        Animation jpp = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.fly);
+        AnimationSet jppSet = (AnimationSet) jpp;
+
+        float xDeltaPct = (xDelta / getParent().getWidth()) * 5;
+        float yDeltaPct = (yDelta / getParent().getHeight())* 5;
+
+        TranslateAnimation translateAnimation = new TranslateAnimation( TranslateAnimation.RELATIVE_TO_PARENT, 0,
+                                                                        TranslateAnimation.RELATIVE_TO_PARENT, xDeltaPct,
+                                                                        TranslateAnimation.RELATIVE_TO_PARENT, 0,
+                                                                        TranslateAnimation.RELATIVE_TO_PARENT, yDeltaPct);
+        translateAnimation.setDuration(1000);
+        jppSet.addAnimation(translateAnimation);
+
+        jpp.setAnimationListener(new ViewRemover(activity, imageView));
         imageView.startAnimation(jpp);
     }
 
-    private void setupListener(){
+    private void setupListener() {
         imageView.setOnTouchListener(new View.OnTouchListener() {
+            float rawStartX = 0;
+            float rawStartY = 0;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    imageView.setOnTouchListener(null);
-                    animate();
-                    new JppText(activity).start((int)event.getX()+getX(), (int)event.getY()+getY());
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN:
+                        rawStartX = event.getRawX();
+                        rawStartY = event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        imageView.setOnTouchListener(null);
+                        animate( event.getRawX() - rawStartX,  event.getRawY() - rawStartY);
+                        new JppText(activity).start((int) event.getX() + getX(), (int) event.getY() + getY());
+                        break;
                 }
                 return true;
             }
