@@ -24,6 +24,10 @@ import ch.neymar.jean.jpp.utils.ViewRemover;
  */
 
 public class JppItem {
+    private final static float DISTANCE_MULTIPLYIER = 4;
+    private final static long MAX_DURATION = 2000;
+    private final static long MIN_DURATION = 300;
+
     private ImageView imageView;
     private Drawable drawable;
     private MainActivity activity;
@@ -64,20 +68,30 @@ public class JppItem {
         return params.topMargin;
     }
 
-    protected void animate(float xDelta, float yDelta) {
+    protected void animate(float xDelta, float yDelta, long time) {
         getParent().bringChildToFront(imageView);
         Animation jpp = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.fly);
         AnimationSet jppSet = (AnimationSet) jpp;
 
-        float xDeltaPct = (xDelta / getParent().getWidth()) * 5;
-        float yDeltaPct = (yDelta / getParent().getHeight())* 5;
+        float xDeltaPct = (xDelta / getParent().getWidth()) * DISTANCE_MULTIPLYIER;
+        float yDeltaPct = (yDelta / getParent().getHeight()) * DISTANCE_MULTIPLYIER;
 
         TranslateAnimation translateAnimation = new TranslateAnimation( TranslateAnimation.RELATIVE_TO_PARENT, 0,
                                                                         TranslateAnimation.RELATIVE_TO_PARENT, xDeltaPct,
                                                                         TranslateAnimation.RELATIVE_TO_PARENT, 0,
                                                                         TranslateAnimation.RELATIVE_TO_PARENT, yDeltaPct);
-        translateAnimation.setDuration(1000);
         jppSet.addAnimation(translateAnimation);
+
+        long duration = time;
+        if(duration > MAX_DURATION){
+            duration = MAX_DURATION;
+        }
+        if(duration< MIN_DURATION){
+            duration = MIN_DURATION;
+        }
+        for(Animation anim : jppSet.getAnimations()){
+            anim.setDuration(duration);
+        }
 
         jpp.setAnimationListener(new ViewRemover(activity, imageView));
         imageView.startAnimation(jpp);
@@ -87,6 +101,7 @@ public class JppItem {
         imageView.setOnTouchListener(new View.OnTouchListener() {
             float rawStartX = 0;
             float rawStartY = 0;
+            long startTime;
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -94,10 +109,11 @@ public class JppItem {
                     case MotionEvent.ACTION_DOWN:
                         rawStartX = event.getRawX();
                         rawStartY = event.getRawY();
+                        startTime = event.getEventTime();
                         break;
                     case MotionEvent.ACTION_UP:
                         imageView.setOnTouchListener(null);
-                        animate( event.getRawX() - rawStartX,  event.getRawY() - rawStartY);
+                        animate( event.getRawX() - rawStartX,  event.getRawY() - rawStartY, event.getEventTime() - startTime);
                         new JppText(activity).start((int) event.getX() + getX(), (int) event.getY() + getY());
                         break;
                 }
